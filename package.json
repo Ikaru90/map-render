@@ -1,0 +1,24 @@
+{
+  "name": "map-render",
+  "version": "1.0.0",
+  "description": "Express, websocket, pixi",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "express",
+    "websocket",
+    "pixi"
+  ],
+  "author": "Ikaru90",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pixi.js": "^5.0.4",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.1"
+  }
+}

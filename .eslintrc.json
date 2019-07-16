@@ -1,0 +1,16 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "script",
+    "ecmaFeatures": {}
+  },
+  "rules": {
+    "linebreak-style": ["error", "unix"],
+    "semi": "error",
+    "indent": ["error", 2],
+    "max-len": ["error", 120],
+    "no-var": 2,
+    "no-unused-vars": 2,
+    "no-trailing-spaces": "error"
+  }
+}
