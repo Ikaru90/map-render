@@ -22,9 +22,14 @@ const Room = function(x, y, width, height) {
   this.y = y;
   this.width = width;
   this.height = height;
+
+  this.interesect = function(room) {
+    return !(room.x >= (this.x + width) || this.x >= (room.x + room.width)
+      || room.y >= (this.y + height) || this.y >= (room.y + room.height));
+  };
 };
 
-const Map = function(map_width, map_height, roomCount) {
+const Map = function(map_width, map_height) {
   const map_data = [];
   const rooms = [];
 
@@ -32,23 +37,27 @@ const Map = function(map_width, map_height, roomCount) {
     return map_data;
   };
 
-  const addRoom = function() {
-    const room_width = 5 + getRandom(14);
-    const room_height = 5 + getRandom(14);
-    rooms.push(
-      new Room(
-        3 + getRandom(map_width - room_width - 6),
-        3 + getRandom(map_height - room_height - 6),
+  addRooms = function() {
+    for (let i = 0; i < 500; i++) {
+      const room_width = 4 + getRandom(17);
+      const room_height = 4 + getRandom(17);
+
+      const newRoom = new Room(
+        1 + getRandom(map_width - room_width - 2),
+        1 + getRandom(map_height - room_height - 2),
         room_width,
         room_height
-      )
-    );
-  };
+      );
 
-  addRooms = function() {
-    for (let i = 0; i < roomCount; i++ ) {
-      addRoom();
-    };
+      const foundIntersect = rooms.find(function(room){
+        return newRoom.interesect(room);
+      });
+
+      if (!foundIntersect) {
+        rooms.push(newRoom);
+      }
+    }
+
     for (let i = 0; i < map_height; i++) {
       map_data[i] = [];
       for (let j = 0; j < map_width; j++) {
@@ -70,7 +79,7 @@ const Map = function(map_width, map_height, roomCount) {
 
 io.sockets.on('connection', function(socket) {
   console.log(`client connected ${socket.id}`);
-  const map = new Map(100, 50, 25);
+  const map = new Map(80, 40);
   const map_data = map.getMapData();
   socket.emit('send_map', map_data);
   socket.on('disconnect', function() {
