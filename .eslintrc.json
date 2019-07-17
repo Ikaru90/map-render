@@ -1,7 +1,7 @@
 {
   "parserOptions": {
     "ecmaVersion": 6,
-    "sourceType": "script",
+    "sourceType": "module",
     "ecmaFeatures": {}
   },
   "rules": {
@@ -11,6 +11,7 @@
     "max-len": ["error", 120],
     "no-var": 2,
     "no-unused-vars": 2,
-    "no-trailing-spaces": "error"
+    "no-trailing-spaces": "error",
+    "eol-last": ["error", "always"]
   }
 }
