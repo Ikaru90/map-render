@@ -13,7 +13,7 @@ function game_initialize(map) {
   function render_map() {
     for (let y = 0; y < map.length; y++ ) {
       for (let x = 0; x < map[y].length; x++ ) {
-        if (map[y][x] === 0) {
+        if (map[y][x] === 1) {
           const wall = new PIXI.Sprite(wallTexture);
           wall.x = x * 20;
           wall.y = y * 20;
@@ -41,5 +41,6 @@ function game_initialize(map) {
 socket.on('connect', function() {
   socket.on('send_map', function (map) {
     game_initialize(map);
+    console.log(map);
   });
 });

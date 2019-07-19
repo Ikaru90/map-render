@@ -16,7 +16,7 @@ app.get('/', function(req, res) {
 
 io.sockets.on('connection', function(socket) {
   console.log(`client connected ${socket.id}`);
-  const map = new Map(80, 40);
+  const map = new Map(60, 30);
   const map_data = map.getMapData();
   socket.emit('send_map', map_data);
   socket.on('disconnect', function() {
