@@ -1,4 +1,4 @@
-# Random map render
+# map render with A star
 
 ## Setup
 
