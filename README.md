@@ -8,6 +8,8 @@ npm install
 
 **npm run start** or (или) **node app.js**
 
+UPD: Теперь можно отслеживать процесс создания. Страница не блокируется. 
+
 Map 60 x 30 blocks (Карта 80 x 40 блоков)
 white block - wall (белый блок - стена)
 grey block - floor (сервый блок - пол)

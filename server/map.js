@@ -2,7 +2,7 @@ const { performance } = require('perf_hooks');
 const getRandom = require('./utils');
 const Room = require('./room');
 
-const Map = function(map_width, map_height) {
+const Map = function(map_width, map_height, socket) {
   const map_data = [];
   const rooms = [];
 
@@ -119,15 +119,30 @@ const Map = function(map_width, map_height) {
   addRooms();
   console.log('Cоздание комнат = ', performance.now() - roomTime);
   const passageTime = performance.now();
-  for (let i = 0; i < rooms.length -1; i++){
-    const start = rooms[i].getRoomCenter();
-    const finish = rooms[i+1].getRoomCenter();
-    generatePassage(start, finish);
-  }
-  console.log('Cоздание переходов = ', performance.now() - passageTime);
-  const wallTime = performance.now();
-  generateWalls();
-  console.log('Cоздание стен = ', performance.now() - wallTime);
+
+  rooms.length - 1;
+  let currentRoom = 0;
+
+  const asyncGeneratePassage = () => {
+    setTimeout(() => {
+      const start = rooms[currentRoom].getRoomCenter();
+      const finish = rooms[currentRoom + 1].getRoomCenter();
+      generatePassage(start, finish);
+      currentRoom++;
+      if (currentRoom < rooms.length - 1) {
+        socket.emit('send_map', map_data);
+        asyncGeneratePassage();
+      } else {
+        const wallTime = performance.now();
+        generateWalls();
+        console.log('Cоздание переходов = ', performance.now() - passageTime);
+        console.log('Cоздание стен = ', performance.now() - wallTime);
+        socket.emit('send_map', map_data);
+      }
+    }, 0);
+  };
+
+  asyncGeneratePassage();
 
   this.getMapData = function() {
     return map_data;
