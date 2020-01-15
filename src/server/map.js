@@ -18,7 +18,7 @@ const Map = function(map_width, map_height, socket) {
         room_height
       );
 
-      const foundIntersect = rooms.find(function(room){
+      const foundIntersect = rooms.find(function(room) {
         return newRoom.hasInteresect(room);
       });
 
@@ -51,7 +51,7 @@ const Map = function(map_width, map_height, socket) {
     const active = [];
     active.push(start);
 
-    const calcCost = function(p, f){
+    const calcCost = function(p, f) {
       const cost = map_data[p.y][p.x] === 0 ? 1000 : 0;
       return cost + Math.sqrt((p.x - f.x)*(p.x - f.x) + (p.y - f.y)*(p.y - f.y));
     };

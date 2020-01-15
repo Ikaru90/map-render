@@ -7,7 +7,7 @@ const Map = require('./server/map');
 
 server.listen(port);
 
-app.use('/pixi', express.static(`${__dirname}/node_modules/pixi.js/dist/`));
+app.use('/pixi', express.static(`${__dirname.replace('\\\src', '')}/node_modules/pixi.js/dist/`));
 app.use(express.static(`${__dirname}/client`));
 
 app.get('/', function(req, res) {

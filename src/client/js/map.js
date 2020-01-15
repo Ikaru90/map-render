@@ -10,7 +10,7 @@ function initialize() {
   });
   document.body.appendChild(app.view);
 
-  function resizeGame(){
+  function resizeGame() {
     app.renderer.resize(window.innerWidth, window.innerHeight);
   };
 
